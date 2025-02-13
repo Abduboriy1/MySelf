@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # Install necessary Python dependencies
-RUN pip install --no-cache-dir flask flask-cors chromadb google-generativeai
+RUN pip install --no-cache-dir flask flask-cors chromadb google-generativeai load_dotenv
 
 # Expose the port Flask runs on
 EXPOSE 5000

@@ -1,12 +1,15 @@
 from flask import Flask, request, jsonify
 import chromadb
 import google.generativeai as genai
+from dotenv import load_dotenv
+import os
+
 
 app = Flask(__name__)
+load_dotenv()
 
 # Configure API Keys
-GEMINI_API_KEY = "AIzaSyA-mLVrCw_ZeVcUS1cJkBT4gFy6gh564b4"  # Replace with your actual API key
-genai.configure(api_key=GEMINI_API_KEY)
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 # Initialize ChromaDB
 chroma_client = chromadb.Client()
