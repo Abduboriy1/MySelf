@@ -80,6 +80,7 @@ export default defineComponent({
 /* Default Navbar Styles */
 .navbar {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
     background-color: #fefefe;
