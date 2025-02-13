@@ -8,15 +8,15 @@
               Software Engineer specializing in full-stack development with expertise in PHP, Laravel, React, and cloud technologies. Passionate about building scalable solutions and optimizing workflows.
             </p>
             <div class="flex space-x-4">
-              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
+              <a href="https://github.com/Abduboriy1" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
                 <Github class="h-6 w-6" />
                 <span class="sr-only">GitHub</span>
               </a>
-              <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
+              <a href="https://www.linkedin.com/in/abduboriy" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
                 <Linkedin class="h-6 w-6" />
                 <span class="sr-only">LinkedIn</span>
               </a>
-              <a href="mailto:your.email@example.com" class="text-gray-400 hover:text-white transition-colors">
+              <a href="mailto:uzbekbory@gmail.com" class="text-gray-400 hover:text-white transition-colors">
                 <Mail class="h-6 w-6" />
                 <span class="sr-only">Email</span>
               </a>
@@ -24,7 +24,7 @@
           </div>
           
           <div>
-            <h3 class="text-xl font-semibold mb-6">Quick Links</h3>
+            <!-- <h3 class="text-xl font-semibold mb-6">Quick Links</h3>
             <nav class="space-y-4">
               <router-link to="/" class="block text-gray-400 hover:text-white transition-colors">
                 Home
@@ -38,7 +38,7 @@
               <router-link to="/contact" class="block text-gray-400 hover:text-white transition-colors">
                 Contact
               </router-link>
-            </nav>
+            </nav> -->
           </div>
           
           <div>
@@ -62,7 +62,7 @@
               Interested in working together? Let's connect and create something amazing.
             </p>
             <router-link 
-              to="/contact" 
+              to="mailto:uzbekbory@gmail.com" 
               class="inline-flex items-center text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded transition-colors"
             >
               Contact Me

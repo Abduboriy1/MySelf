@@ -2,14 +2,13 @@
 import { ref, computed, watch, nextTick } from 'vue';
 import { Send, Bot, User } from 'lucide-vue-next';
 
-const messages = ref([
-    
-]);
+const messages = ref([]);
 const inputText = ref("");
 const typingIndex = ref(0);
 const isTyping = ref(false);
 const chatContainer = ref(null);
 
+// Initial bot message
 addMessage("Hello! How can I help you?", "bot");
 
 const typingMessage = computed(() => {
@@ -40,10 +39,34 @@ async function sendMessage() {
     const userMessage = inputText.value;
     inputText.value = "";
 
+    // Add user message
     addMessage(userMessage, "user");
 
-    // Simulate bot response
-    addMessage("That's interesting! Tell me more.", "bot");
+    // Show bot typing message
+    const botPlaceholder = { text: "Typing...", sender: "bot" };
+    messages.value.push(botPlaceholder);
+
+    try {
+        // Call the Laravel API endpoint
+        const response = await fetch("api/query-rag", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ query: userMessage }),
+        });
+
+        const data = await response.json();
+        messages.value.pop(); // Remove "Typing..." placeholder
+
+        if (response.ok) {
+            addMessage(data.response, "bot"); // Display AI response
+        } else {
+            addMessage("Sorry, I couldn't process your request.", "bot");
+        }
+    } catch (error) {
+        console.error("Error fetching AI response:", error);
+        messages.value.pop(); // Remove "Typing..." placeholder
+        addMessage("Error connecting to AI service.", "bot");
+    }
 }
 
 function scrollToBottom() {
@@ -62,7 +85,7 @@ function scrollToBottom() {
             <div v-for="(message, index) in messages" :key="index" class="flex items-start space-x-2"
                 :class="message.sender === 'user' ? 'justify-end' : 'justify-start'">
                 <Bot v-if="message.sender === 'bot'" class="w-5 h-5 text-blue-400" />
-                <div class="px-4 py-2 rounded-lg"
+                <div style="max-width: 90%;" class="px-4 py-2 rounded-lg"
                     :class="message.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-700 text-gray-200'">
                     {{ index === messages.length - 1 && isTyping ? typingMessage : message.text }}
                 </div>
