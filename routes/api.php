@@ -19,7 +19,7 @@ Route::post('/query-rag', function (Request $request) {
     }
 
     // Call the Python script running as a service
-    $pythonServiceUrl = 'http://host.docker.internal:5000/query'; // Update with actual service URL if needed
+    $pythonServiceUrl = env('PYTHON_SERVER', 'http://localhost:5000/query'); // Update with actual service URL if needed
 
     $response = Http::post($pythonServiceUrl, [
         'query' => $query,
