@@ -9,8 +9,8 @@ import Footer from '@/Components/Footer.vue';
         <!-- Animated Background -->
         <div class="absolute inset-0 bg-sky-blue overflow-hidden">
             <div class="cloud-container absolute inset-0">
-                <div class="cloud" style="top: 20%; left: 70%; animation-delay: 0s; animation-duration: 5s;"></div>
-                <div class="cloud" style="top: 40%; left: 20%; animation-delay: 1s; animation-duration: 6s;"></div>
+                <div class="cloud" style="top: 20%; left: 80%; animation-delay: 0s; animation-duration: 5s;"></div>
+                <div class="cloud" style="top: 40%; left: 10%; animation-delay: 1s; animation-duration: 6s;"></div>
             </div>
         </div>
 
@@ -47,7 +47,7 @@ import Footer from '@/Components/Footer.vue';
 }
 
 .bg-sky-blue {
-    background: linear-gradient(to bottom, #87ceeb, #f0f8ff, transparent);
+    background: linear-gradient(to bottom, #0f172a, #142140ad, transparent);
 }
 
 .cloud-container {

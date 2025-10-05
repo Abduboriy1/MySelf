@@ -1,10 +1,34 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue'
-import { ref } from 'vue'
-import { Mail, Phone, MapPin, Github, Linkedin, Download, ArrowRight, Briefcase, Calendar, Code2, Sparkles, X, Award } from 'lucide-vue-next'
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
+import { Mail, Phone, MapPin, Github, Linkedin, Download, ArrowRight, Briefcase, Calendar, Code2, Sparkles, X, Award, MessageCircle } from 'lucide-vue-next'
 import AiChat from '@/Components/AiChat.vue'
 import resume from '../Assets/Resume.pdf'
+import me from '../Assets/me.jpeg'
+
 const chatOpen = ref(false)
+const unread = ref(0) // increment when you want to show a badge
+
+// Prefer bottom-sheet on small screens, drawer on md+
+const isDesktop = computed(() => typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches)
+
+// Keyboard shortcuts
+function onKey(e) {
+    const metaK = (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'
+    if (metaK) {
+        e.preventDefault()
+        chatOpen.value = true
+    }
+    if (e.key === 'Escape' && chatOpen.value) chatOpen.value = false
+}
+onMounted(() => window.addEventListener('keydown', onKey))
+onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
+
+// Optional: simulate unread badge clear on open
+function openChat() {
+    chatOpen.value = true
+    unread.value = 0
+}
 
 const profile = ref({
     name: 'Abduboriy Abdurakhmonov',
@@ -42,7 +66,8 @@ const profile = ref({
             period: '2019 — 2023',
             bullets: [
                 'Replatformed React/Firebase app to Laravel/Vue, cutting infra by ~$5k/mo.',
-                'Built driver tasking, HOS tools, and internal analytics dashboards.'
+                'Built driver tasking, HOS tools, and internal analytics dashboards.',
+                'Automated manual tasks, saving 200+ hrs annually.'
             ],
             tech: ['Laravel', 'Vue', 'React', 'C#/.NET', 'Firebase']
         },
@@ -51,10 +76,9 @@ const profile = ref({
             role: 'Web Developer',
             period: '2020 — 2022',
             bullets: [
-                'Replatformed React/Firebase app to Laravel/Vue, cutting infra by ~$5k/mo.',
-                'Built driver tasking, HOS tools, and internal analytics dashboards.'
-            ],
-            tech: ['Laravel', 'Vue', 'React', 'C#/.NET', 'Firebase']
+                'Utilized HTML, CSS, JavaScript, and PHP to create and maintain university websites.',
+                'Collaborated with cross-functional teams to gather requirements and deliver high-quality web solutions.'],
+            tech: ['HTML', 'CSS', 'JavaScript', 'PHP', 'WordPress']
         }
     ],
     skills: [
@@ -135,8 +159,7 @@ const profile = ref({
                     <div class="relative">
                         <div
                             class="relative mx-auto aspect-square w-64 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 to-slate-800 shadow-2xl md:w-72">
-                            <img v-if="profile.avatarUrl" :src="profile.avatarUrl" alt="Headshot"
-                                class="h-full w-full object-cover" />
+                            <img v-if="me" :src="me" alt="Headshot" class="h-full w-full object-cover" />
                             <div v-else class="flex h-full w-full items-center justify-center text-slate-500">Add your
                                 photo</div>
                         </div>
@@ -151,32 +174,103 @@ const profile = ref({
                 </div>
             </section>
 
-            <section class="mx-auto max-w-6xl px-4 py-12 bg-slate-900/90 rounded-xl">
-                <h2 class="flex items-center gap-2 text-2xl font-semibold">
-                    <Briefcase class="h-6 w-6" /> Experience
-                </h2>
-                <ol class="relative mt-6 border-s border-white/10">
-                    <li v-for="(job, idx) in profile.experiences" :key="idx" class="ms-4 pb-10">
-                        <div class="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border border-white/20 bg-white/40">
+            <section class="relative mx-auto max-w-6xl px-4 py-14 ">
+
+
+
+                <!-- header -->
+                <header class="relative z-10 flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3">
+                        <div class="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-sky-500/20 to-cyan-400/20
+               ring-1 ring-inset ring-white/15 shadow-sm shadow-cyan-400/10">
+                            <Briefcase class="size-5 text-sky-300" />
                         </div>
-                        <div class="flex flex-col justify-between gap-2 md:flex-row md:items-center">
-                            <div class="text-lg font-medium">{{ job.role }} · <span class="text-slate-400">{{
-                                job.company }}</span></div>
-                            <div class="inline-flex items-center gap-2 text-sm text-slate-400">
-                                <Calendar class="h-4 w-4" /> {{ job.period }}
+                        <div>
+                            <h2 class="text-2xl font-semibold tracking-tight">Experience</h2>
+                            <p class="text-sm text-slate-400">Impact, scope, and the tools that got it done.</p>
+                        </div>
+                    </div>
+
+                    <!-- subtle pill -->
+                    <span class="hidden md:inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs
+             bg-white/5 ring-1 ring-white/10 text-slate-300">
+                        <span class="size-1.5 rounded-full bg-emerald-400/80 animate-pulse"></span>
+                        Updated automatically
+                    </span>
+                </header>
+
+                <!-- timeline -->
+                <ol class="relative z-10 mt-8 space-y-12"> <!-- added space-y for breathing room -->
+                    <!-- gradient spine -->
+                    <div aria-hidden="true" class="pointer-events-none absolute left-4 top-0 h-full w-px md:left-1/2
+           bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+
+                    <li v-for="(job, idx) in profile.experiences" :key="idx"
+                        class="relative md:grid md:grid-cols-2 md:gap-10 md:items-start">
+
+                        <!-- dot -->
+                        <div class="absolute left-[15px] md:left-1/2 md:-translate-x-1/2 top-4 size-3 rounded-full
+             bg-gradient-to-br from-sky-400 to-cyan-300 ring-2 ring-offset-2 ring-offset-slate-900/60 ring-white/20">
+                        </div>
+
+                        <!-- left column -->
+                        <div class="pl-10 pr-2 md:pl-0 md:pr-8 md:text-right md:order-1">
+                            <div class="inline-flex items-center gap-2 text-xs text-slate-400">
+                                <Calendar class="size-4" />
+                                <span class="tabular-nums">{{ job.period }}</span>
+                            </div>
+                            <h3 class="mt-2 text-lg font-semibold leading-snug">
+                                {{ job.role }}
+
+                            </h3>
+                            <div class="mt-3 flex flex-wrap gap-2 md:justify-end">
+                                <span v-for="t in job.tech" :key="t" class="rounded-full px-2.5 py-1 text-[11px] leading-4
+                 bg-white/5 text-slate-300 ring-1 ring-white/10
+                 transition-transform duration-300">
+                                    {{ t }}
+                                </span>
                             </div>
                         </div>
-                        <ul class="mt-3 list-disc space-y-2 pl-6 text-slate-300">
-                            <li v-for="(b, i) in job.bullets" :key="i">{{ b }}</li>
-                        </ul>
-                        <div class="mt-3 flex flex-wrap gap-2">
-                            <span v-for="t in job.tech" :key="t"
-                                class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-slate-300">{{
-                                    t }}</span>
+
+                        <!-- right column: full-hover card -->
+                        <div class="pl-10 md:pl-8 md:order-2">
+                            <article class="relative overflow-hidden rounded-2xl
+               bg-gradient-to-b from-white/[0.06] to-white/[0.03]
+               ring-1 ring-white/10 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]
+               transition-all duration-300
+               hover:shadow-2xl hover:shadow-sky-500/20 hover:ring-sky-400/40">
+
+                                <!-- fix: full-bleed sheen overlay -->
+                                <span class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300
+                 group-hover:opacity-100"
+                                    style="background: conic-gradient(from 180deg at 50% -10%, rgba(56,189,248,.18), transparent 40%);">
+                                </span>
+
+                                <div class="relative p-6">
+                                    <ul class="space-y-2.5 text-slate-300">
+                                        <li v-for="(b, i) in job.bullets" :key="i" class="flex gap-3">
+                                            <span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-sky-300/70"></span>
+                                            <p class="leading-relaxed">{{ b }}</p>
+                                        </li>
+                                    </ul>
+                                    <footer class="mt-5 flex items-center justify-between text-xs text-slate-400">
+                                        <span class="inline-flex items-center gap-2">
+                                            <span class="size-1.5 rounded-full bg-emerald-400"></span>
+                                            Proven impact
+                                        </span>
+                                        <span class="inline-flex items-center gap-1.5 rounded-full px-2 py-1
+                     bg-sky-400/10 text-sky-200 ring-1 ring-inset ring-sky-300/20">
+                                            <Briefcase class="size-3.5" /> {{ job.company }}
+                                        </span>
+                                    </footer>
+                                </div>
+                            </article>
                         </div>
                     </li>
                 </ol>
+
             </section>
+
 
             <section class="mx-auto max-w-6xl px-4 pb-16 bg-slate-900/90 rounded-xl">
                 <h2 class="flex items-center gap-2 text-2xl font-semibold">
@@ -227,52 +321,72 @@ const profile = ref({
                 </ul>
             </section>
 
-            <!-- ========= Side tab trigger (always visible) ========= -->
-            <button :class="bg - slate - 900 / 90" @click="chatOpen = true"
-                class="bg-slate-900/90 group rotate-90 fixed right-1 top-1/2 z-40 -translate-y-1/2 rounded-2xl border border-white/10 px-3 py-2 text-sm font-medium backdrop-blur transition hover:bg-black/70"
-                aria-label="Open AI chat about me">
-                <span class="inline-flex items-center gap-2 origin-right ">
-                    <Sparkles class="h-4 w-4" />
-                    <span class="text-c">Chat with AI about me</span>
+            <!-- ===== Floating Action Button (FAB) - bottom right ===== -->
+            <button @click="openChat" aria-label="Open AI chat" class="fixed bottom-[calc(env(safe-area-inset-bottom)+1rem)] right-4 z-50
+         inline-flex items-center gap-2 rounded-full border border-white/10
+         bg-black px-4 py-2 text-sm font-medium text-slate-200 shadow-xl
+         backdrop-blur hover:bg-black/70 active:scale-[0.98]
+         md:px-5 md:py-2.5">
+                <span class="relative inline-flex">
+                    <MessageCircle class="h-5 w-5" />
+                    <span v-if="unread > 0"
+                        class="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-emerald-500 text-[10px] font-bold text-white">
+                        {{ Math.min(9, unread) }}
+                    </span>
                 </span>
+                <span class="hidden sm:block">Ask AI</span>
             </button>
 
-            <!-- ========= Slide-over chat panel ========= -->
-            <transition name="fade" mode="out-in">
-                <div v-if="chatOpen" class="fixed inset-0 z-50">
-                    <!-- backdrop -->
-                    <div class="absolute inset-0 bg-black/50" @click="chatOpen = false" aria-hidden="true"></div>
-                    <!-- panel -->
-                    <div class="absolute right-0 top-0 h-full w-full lg:w-1/2">
-                        <transition name="slide">
-                            <section
-                                class="absolute right-0 top-0 flex h-full w-full flex-col border-l border-white/10 bg-slate-900/95 backdrop-blur">
-                                <!-- header -->
-                                <header class="flex items-center justify-between border-b border-white/10 px-4 py-3">
-                                    <div class="flex items-center gap-2 text-sm text-slate-300">
-                                        <Sparkles class="h-4 w-4" /> Ask AI about {{ profile.name }}
-                                    </div>
-                                    <button @click="chatOpen = false"
-                                        class="rounded-lg border border-white/10 bg-white/5 p-2 hover:bg-white/10"
-                                        aria-label="Close">
-                                        <X class="h-4 w-4" />
-                                    </button>
-                                </header>
-                                <!-- body -->
-                                <div class="flex-1 overflow-hidden">
-                                    <AiChat />
-                                </div>
-                            </section>
-                        </transition>
+            <!-- ===== Backdrop ===== -->
+            <transition name="fade">
+                <div v-if="chatOpen" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-[2px]"
+                    @click="chatOpen = false" aria-hidden="true"></div>
+            </transition>
+
+            <!-- ===== Responsive Chat Container =====
+                - Mobile: bottom-sheet full height (100dvh)
+                - Desktop: right drawer with rounded corners
+            -->
+            <transition :name="isDesktop ? 'slide-right' : 'slide-up'" mode="out-in">
+                <section v-if="chatOpen" role="dialog" aria-modal="true" class="fixed z-50
+           md:right-4 md:top-4
+           md:h-[80vh] md:w-[520px]
+           md:rounded-2xl
+           md:border md:border-white/10
+           md:bg-slate-900/90
+           md:shadow-2xl
+           md:backdrop-blur
+           /* Mobile bottom-sheet */
+           left-0 right-0 bottom-0 top-0
+           md:left-auto md:bottom-auto md:top-4
+           bg-slate-900/95">
+                    <!-- Header -->
+                    <header
+                        class="flex items-center justify-between border-b border-white/10 px-4 py-3 md:rounded-t-2xl">
+                        <div class="flex items-center gap-2 text-sm text-slate-300">
+                            <Sparkles class="h-4 w-4" />
+                            Ask AI about {{ profile.value?.name || profile.name }}
+                        </div>
+                        <button @click="chatOpen = false" aria-label="Close"
+                            class="rounded-lg border border-white/10 bg-white/5 p-2 hover:bg-white/10">
+                            <X class="h-4 w-4" />
+                        </button>
+                    </header>
+
+
+                    <!-- Scroll area -->
+                    <div class="flex h-[calc(100dvh-56px)] flex-col md:h-[calc(80vh-56px)]">
+                        <AiChat />
                     </div>
-                </div>
+
+                </section>
             </transition>
         </div>
     </GuestLayout>
 </template>
 
 <style scoped>
-/* transitions for the overlay + panel */
+/* Fade (backdrop) */
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 200ms ease;
@@ -283,13 +397,35 @@ const profile = ref({
     opacity: 0;
 }
 
-.slide-enter-active,
-.slide-leave-active {
+/* Drawer (desktop) */
+.slide-right-enter-active,
+.slide-right-leave-active {
     transition: transform 220ms ease;
 }
 
-.slide-enter-from,
-.slide-leave-to {
-    transform: translateX(100%);
+.slide-right-enter-from,
+.slide-right-leave-to {
+    transform: translateX(120%);
+}
+
+/* Bottom-sheet (mobile) */
+.slide-up-enter-active,
+.slide-up-leave-active {
+    transition: transform 220ms ease;
+}
+
+.slide-up-enter-from,
+.slide-up-leave-to {
+    transform: translateY(100%);
+}
+
+/* Optional: slim scrollbars inside chat */
+:deep(.overflow-y-auto)::-webkit-scrollbar {
+    width: 8px;
+}
+
+:deep(.overflow-y-auto)::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .12);
+    border-radius: 9999px;
 }
 </style>
