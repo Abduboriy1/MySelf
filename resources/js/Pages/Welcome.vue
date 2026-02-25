@@ -19,7 +19,7 @@ import {
 } from 'lucide-vue-next'
 import AiChat from '@/Components/AiChat.vue'
 import resume from '../Assets/Resume.pdf'
-import me from '../Assets/me.jpeg'
+import me from '../Assets/me.png'
 
 const chatOpen = ref(false)
 const unread = ref(0) // increment when you want to show a badge
