@@ -47,7 +47,7 @@ import Footer from '@/Components/Footer.vue';
 }
 
 .bg-sky-blue {
-    background: linear-gradient(to bottom, #0f172a, #142140ad, transparent);
+    background: linear-gradient(to bottom, #fafaf9, #f5f5f4);
 }
 
 .cloud-container {
@@ -59,23 +59,16 @@ import Footer from '@/Components/Footer.vue';
 
 .cloud {
     position: absolute;
-    background: white;
+    background: rgba(214, 211, 208, 0.4);
     width: 150px;
     height: 100px;
     border-radius: 50%;
     box-shadow:
-        -40px -20px 0 -10px white,
-        40px -20px 0 -10px white,
-        0 20px 0 -10px white;
+        -40px -20px 0 -10px rgba(214, 211, 208, 0.4),
+        40px -20px 0 -10px rgba(214, 211, 208, 0.4),
+        0 20px 0 -10px rgba(214, 211, 208, 0.4);
     filter: blur(10px);
-    opacity: 0.8;
+    opacity: 0.3;
     animation: moveClouds 5s ease-in-out infinite;
-}
-
-.footer {
-    border-radius: 14px;
-    height: 250px;
-    background: linear-gradient(to bottom, #87cfebcb, #f0f8ff);
-    color: black;
 }
 </style>

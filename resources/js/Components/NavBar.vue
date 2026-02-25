@@ -12,10 +12,9 @@ interface NavLink {
 const navLinks = ref<NavLink[]>([
     { name: "About", href: "#about" },
     { name: "Experience", href: "#experience" },
-    { name: "Certifications", href: "#certifications" },
     { name: "Skills", href: "#skills" },
+    { name: "Certifications", href: "#certifications" },
     { name: "Contact", href: "#contact" },
-    { name: "FAQ", href: "#faq" },
 ]);
 
 const isMobileMenuOpen = ref(false);
@@ -40,20 +39,25 @@ async function copyEmailToClipboard() {
 <template>
     <!-- Sticky / glassy container -->
     <div class="sticky top-4 z-50">
-        <nav class="mx-auto max-w-6xl rounded-2xl border border-white/10 bg-slate-900/70 backdrop-blur px-4 md:px-6 py-3 shadow-lg"
-            role="navigation" aria-label="Main">
+        <nav
+            class="mx-auto max-w-6xl rounded-2xl border border-stone-200 bg-white/80 backdrop-blur px-4 md:px-6 py-3 shadow-lg"
+            role="navigation"
+            aria-label="Main"
+        >
             <div class="flex items-center justify-between gap-3">
                 <!-- Left: status + mobile toggle -->
                 <div class="flex items-center gap-3">
                     <div
-                        class="hidden sm:flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300">
+                        class="hidden sm:flex items-center gap-2 rounded-full border border-stone-200 bg-stone-100 px-3 py-1 text-xs text-stone-600">
                         <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
                         Available for Projects
                     </div>
 
                     <button
-                        class="flex sm:hidden items-center justify-center rounded-lg border border-white/10 bg-white/5 p-2 text-slate-300 hover:bg-white/10"
-                        @click="toggleMobileMenu" aria-label="Toggle Menu">
+                        class="flex sm:hidden items-center justify-center rounded-lg border border-stone-200 bg-stone-100 p-2 text-stone-600 hover:bg-stone-200"
+                        @click="toggleMobileMenu"
+                        aria-label="Toggle Menu"
+                    >
                         <Menu v-if="!isMobileMenuOpen" class="h-5 w-5" />
                         <X v-else class="h-5 w-5" />
                     </button>
@@ -62,13 +66,14 @@ async function copyEmailToClipboard() {
                 <!-- Center: logo + desktop links -->
                 <div class="flex items-center gap-6">
                     <Link href="/" class="shrink-0">
-                    <!-- <ApplicationLogo class="h-10 w-10 text-slate-300" /> -->
                     </Link>
 
                     <ul class="hidden md:flex items-center gap-4">
                         <li v-for="(link, i) in navLinks" :key="i">
-                            <a :href="link.href"
-                                class="inline-flex items-center gap-2 rounded-xl border border-transparent px-3 py-2 text-sm text-slate-300 hover:text-white hover:border-white/10 hover:bg-white/5 transition">
+                            <a
+                                :href="link.href"
+                                class="inline-flex items-center gap-2 rounded-xl border border-transparent px-3 py-2 text-sm text-stone-600 hover:text-stone-900 hover:border-stone-200 hover:bg-stone-100 transition"
+                            >
                                 {{ link.name }}
                             </a>
                         </li>
@@ -76,11 +81,13 @@ async function copyEmailToClipboard() {
                 </div>
 
                 <!-- Right: email copy -->
-                <button @click="copyEmailToClipboard"
-                    class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-200 hover:bg-white/10 transition"
-                    aria-label="Copy email">
+                <button
+                    @click="copyEmailToClipboard"
+                    class="inline-flex items-center gap-2 rounded-xl border border-stone-200 bg-stone-100 px-3 py-2 text-sm text-stone-700 hover:bg-stone-200 transition"
+                    aria-label="Copy email"
+                >
                     <component :is="copied ? Check : Mail" class="h-4 w-4" />
-                    <span class="hidden sm:inline-block" style="min-width: 165px;">
+                    <span class="hidden sm:inline-block email-label">
                         {{ copied ? "Copied!" : "uzbekbory@gmail.com" }}
                     </span>
                 </button>
@@ -89,12 +96,14 @@ async function copyEmailToClipboard() {
 
             <!-- Mobile menu -->
             <transition name="fade">
-                <div v-if="isMobileMenuOpen" class="mt-3 border-t border-white/10 pt-3 md:hidden">
+                <div v-if="isMobileMenuOpen" class="mt-3 border-t border-stone-200 pt-3 md:hidden">
                     <ul class="grid gap-2">
                         <li v-for="(link, i) in navLinks" :key="'m-' + i">
-                            <a :href="link.href"
-                                class="block w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-200 hover:bg-white/10"
-                                @click="isMobileMenuOpen = false">
+                            <a
+                                :href="link.href"
+                                class="block w-full rounded-lg border border-stone-200 bg-stone-100 px-3 py-2 text-sm text-stone-700 hover:bg-stone-200"
+                                @click="isMobileMenuOpen = false"
+                            >
                                 {{ link.name }}
                             </a>
                         </li>
@@ -114,5 +123,9 @@ async function copyEmailToClipboard() {
 .fade-enter-from,
 .fade-leave-to {
     opacity: 0;
+}
+
+.email-label {
+    min-width: 165px;
 }
 </style>

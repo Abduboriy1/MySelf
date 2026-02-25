@@ -11,7 +11,7 @@ COPY . /app
 RUN pip install --no-cache-dir flask flask-cors chromadb google-generativeai load_dotenv
 
 # Expose the port Flask runs on
-EXPOSE 5000
+EXPOSE 5001
 
 # Run the Python script when the container starts
 CMD ["python", "main.py"]

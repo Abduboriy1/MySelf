@@ -1,17 +1,17 @@
 <template>
     <div
-        class="w-full h-full mx-auto flex flex-col rounded-2xl bg-gradient-to-b from-zinc-950/70 to-zinc-900/40 backdrop-blur-md shadow-2xl overflow-hidden">
+        class="w-full h-full mx-auto flex flex-col rounded-2xl bg-white shadow-2xl overflow-hidden">
         <!-- Header -->
-        <div class="px-4 py-3 border-b border-zinc-800 flex items-center gap-3 shrink-0">
-            <div class="h-8 w-8 rounded-full bg-zinc-800/80 grid place-items-center ring-1 ring-zinc-700">
-                <Bot class="h-4 w-4 text-zinc-300" />
+        <div class="px-4 py-3 border-b border-stone-200 flex items-center gap-3 shrink-0">
+            <div class="h-8 w-8 rounded-full bg-stone-100 grid place-items-center ring-1 ring-stone-200">
+                <Bot class="h-4 w-4 text-stone-500" />
             </div>
             <div class="flex-1 min-w-0">
-                <div class="text-sm font-medium text-zinc-100 truncate">Assistant</div>
-                <div class="text-xs text-zinc-400">Ask anything • Shift+Enter = newline</div>
+                <div class="text-sm font-medium text-stone-800 truncate">Assistant</div>
+                <div class="text-xs text-stone-500">Ask anything • Shift+Enter = newline</div>
             </div>
             <button v-if="isStreaming" @click="stopStreaming"
-                class="text-xs px-2 py-1 rounded-md border border-zinc-700 hover:bg-zinc-800 text-zinc-300">
+                class="text-xs px-2 py-1 rounded-md border border-stone-200 hover:bg-stone-100 text-stone-600">
                 Stop
             </button>
         </div>
@@ -22,9 +22,9 @@
             <template v-for="m in messages" :key="m.id">
                 <div :class="['flex gap-3 items-start', m.role === 'user' ? 'flex-row-reverse' : '']">
                     <!-- Avatar -->
-                    <div class="shrink-0 h-8 w-8 rounded-full bg-zinc-800 grid place-items-center ring-1 ring-zinc-700">
-                        <User v-if="m.role === 'user'" class="h-4 w-4 text-zinc-300" />
-                        <Bot v-else class="h-4 w-4 text-zinc-300" />
+                    <div class="shrink-0 h-8 w-8 rounded-full bg-stone-100 grid place-items-center ring-1 ring-stone-200">
+                        <User v-if="m.role === 'user'" class="h-4 w-4 text-stone-500" />
+                        <Bot v-else class="h-4 w-4 text-stone-500" />
                     </div>
 
                     <!-- Bubble -->
@@ -32,8 +32,8 @@
                         <div :class="[
                             'rounded-2xl px-4 py-2 text-sm leading-relaxed shadow-sm ring-1',
                             m.role === 'user'
-                                ? 'bg-blue-600 text-white ring-blue-500/40'
-                                : 'bg-zinc-900/60 text-zinc-100 ring-zinc-700/60',
+                                ? 'bg-amber-600 text-white ring-amber-500/40'
+                                : 'bg-stone-100 text-stone-800 ring-stone-200',
                         ]">
                             <!-- Rendered markdown -->
                             <div class="prose-chat" v-html="rendered(m.content)"></div>
@@ -45,11 +45,11 @@
                         <!-- Actions -->
                         <div class="opacity-0 group-hover:opacity-100 transition-opacity mt-1 flex gap-2">
                             <button @click="copyText(m.content)"
-                                class="text-[11px] px-2 py-1 rounded-md border border-zinc-700 hover:bg-zinc-800 text-zinc-300">
+                                class="text-[11px] px-2 py-1 rounded-md border border-stone-200 hover:bg-stone-100 text-stone-600">
                                 Copy
                             </button>
                             <button v-if="m.role === 'assistant'" @click="regenerate(m)"
-                                class="text-[11px] px-2 py-1 rounded-md border border-zinc-700 hover:bg-zinc-800 text-zinc-300">
+                                class="text-[11px] px-2 py-1 rounded-md border border-stone-200 hover:bg-stone-100 text-stone-600">
                                 Regenerate
                             </button>
                         </div>
@@ -58,31 +58,31 @@
             </template>
 
             <!-- Typing indicator -->
-            <div v-if="isStreaming" class="flex items-center gap-2 text-zinc-400 text-sm">
-                <div class="h-2 w-2 rounded-full bg-zinc-500 animate-bounce [animation-delay:-0.2s]"></div>
-                <div class="h-2 w-2 rounded-full bg-zinc-500 animate-bounce"></div>
-                <div class="h-2 w-2 rounded-full bg-zinc-500 animate-bounce [animation-delay:0.2s]"></div>
+            <div v-if="isStreaming" class="flex items-center gap-2 text-stone-500 text-sm">
+                <div class="h-2 w-2 rounded-full bg-stone-400 animate-bounce [animation-delay:-0.2s]"></div>
+                <div class="h-2 w-2 rounded-full bg-stone-400 animate-bounce"></div>
+                <div class="h-2 w-2 rounded-full bg-stone-400 animate-bounce [animation-delay:0.2s]"></div>
                 <span class="ml-2">Assistant is typing…</span>
             </div>
 
             <!-- New messages pill -->
             <button v-if="!atBottom && messages.length" @click="scrollToBottom(true)"
-                class="sticky bottom-3 mx-auto block text-xs px-2 py-1 rounded-full border border-zinc-700 bg-zinc-900/80 text-zinc-300 hover:bg-zinc-800">
+                class="sticky bottom-3 mx-auto block text-xs px-2 py-1 rounded-full border border-stone-200 bg-stone-50 text-stone-600 hover:bg-stone-100">
                 New messages ↓
             </button>
         </div>
 
         <!-- Composer -->
-        <div class="p-3 border-t border-zinc-800 bg-gradient-to-t from-zinc-900/70 to-zinc-900/30"
+        <div class="p-3 border-t border-stone-200 bg-gradient-to-t from-stone-50 to-white"
             :style="{ paddingBottom: `max(env(safe-area-inset-bottom), 12px)` }">
             <div class="relative flex items-end gap-2">
                 <textarea ref="textareaRef" v-model="inputText" :rows="1" @input="autoResize"
                     @keydown.enter.exact.prevent="sendMessage" @keydown.enter.shift.exact.stop
                     @keydown.esc="blurComposer"
-                    class="flex-1 resize-none bg-zinc-900/60 text-zinc-100 placeholder-zinc-500 rounded-xl border border-zinc-700 focus:border-blue-500/60 focus:outline-none px-3 py-2 max-h-40"
+                    class="flex-1 resize-none bg-stone-50 text-stone-800 placeholder-stone-400 rounded-xl border border-stone-200 focus:border-amber-400/60 focus:outline-none px-3 py-2 max-h-40"
                     placeholder="Type a message…" />
                 <button :disabled="!canSend || isStreaming" @click="sendMessage"
-                    class="h-10 w-10 grid place-items-center rounded-xl bg-blue-600 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-blue-500 transition-colors"
+                    class="h-10 w-10 grid place-items-center rounded-xl bg-amber-600 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-amber-500 transition-colors"
                     aria-label="Send">
                     <Send class="h-4 w-4 text-white" />
                 </button>
@@ -262,12 +262,12 @@ function autoResize() {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.15);
     border-radius: 8px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.25);
 }
 
 /* --- Chat prose (safe, minimal) --- */
@@ -277,7 +277,7 @@ function autoResize() {
 
 .prose-chat a.chat-link {
     text-decoration: underline;
-    color: #93c5fd;
+    color: #d97706;
 }
 
 .prose-chat strong {
@@ -290,8 +290,8 @@ function autoResize() {
 
 /* inline code */
 .code-inline {
-    background: #18181b;
-    border: 1px solid #3f3f46;
+    background: #f5f5f4;
+    border: 1px solid #d6d3d1;
     border-radius: 0.375rem;
     padding: 0.15rem 0.35rem;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
@@ -300,8 +300,8 @@ function autoResize() {
 
 /* fenced code block */
 .code-block {
-    background: #0b0b0f;
-    border: 1px solid #27272a;
+    background: #fafaf9;
+    border: 1px solid #e7e5e4;
     border-radius: 0.75rem;
     padding: 0.75rem 0.9rem;
     overflow-x: auto;

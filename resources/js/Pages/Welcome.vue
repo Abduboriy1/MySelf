@@ -1,7 +1,22 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue'
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
-import { Mail, Phone, MapPin, Github, Linkedin, Download, ArrowRight, Briefcase, Calendar, Code2, Sparkles, X, Award, MessageCircle } from 'lucide-vue-next'
+import {ref, onMounted, onBeforeUnmount, computed} from 'vue'
+import {
+    Mail,
+    Phone,
+    MapPin,
+    Github,
+    Linkedin,
+    Download,
+    ArrowRight,
+    Briefcase,
+    Calendar,
+    Code2,
+    Sparkles,
+    X,
+    Award,
+    MessageCircle
+} from 'lucide-vue-next'
 import AiChat from '@/Components/AiChat.vue'
 import resume from '../Assets/Resume.pdf'
 import me from '../Assets/me.jpeg'
@@ -21,6 +36,7 @@ function onKey(e) {
     }
     if (e.key === 'Escape' && chatOpen.value) chatOpen.value = false
 }
+
 onMounted(() => window.addEventListener('keydown', onKey))
 onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 
@@ -32,27 +48,36 @@ function openChat() {
 
 const profile = ref({
     name: 'Abduboriy Abdurakhmonov',
-    title: 'Software Engineer II',
+    title: 'Full Stack Software Engineer',
     tagline: 'I ship fast, type-safe, and user-friendly products.',
     location: 'St. Louis, MO',
     email: 'uzbekbory@gmail.com',
     phone: '+1 (636) 575-1811',
     avatarUrl: 'https://media.licdn.com/dms/image/v2/D4D03AQEvPc5gog5Y-w/profile-displayphoto-shrink_800_800/B4DZZqqjjNG4Ac-/0/1745546263732?e=1757548800&v=beta&t=QHnlvPfbfL33JgDX-DKO0Fd1oIvam88DBZomgFxmEqI',
     social: [
-        { label: 'GitHub', href: 'https://github.com/yourhandle', icon: Github },
-        { label: 'LinkedIn', href: 'https://linkedin.com/in/yourhandle', icon: Linkedin },
-        { label: 'Email', href: 'mailto:you@example.com', icon: Mail },
+        {label: 'GitHub', href: 'https://github.com/yourhandle', icon: Github},
+        {label: 'LinkedIn', href: 'https://linkedin.com/in/yourhandle', icon: Linkedin},
+        {label: 'Email', href: 'mailto:you@example.com', icon: Mail},
     ],
     highlights: [
-        { k: '6+', v: 'yrs experience' },
-        { k: '500+ hrs', v: 'saved via automation' },
-        { k: '99.9%', v: 'uptime on prod' },
+        {k: '7+', v: 'yrs experience'},
+        {k: '500+ hrs', v: 'saved via automation'},
+        {k: '20+', v: 'applications developed'},
     ],
     experiences: [
         {
+            company: 'SRS Acquiom',
+            role: 'Software Engineer',
+            period: '2025 — Present',
+            bullets: [
+                'Working with colleagues on multiple Go applications.'
+            ],
+            tech: ['Go', 'Vue 3', 'TypeScript', 'PostgreSQL', 'CI/CD', 'TestRails', 'vi-test']
+        },
+        {
             company: 'Prologue Technology',
             role: 'Software Engineer II',
-            period: '2023 — Present',
+            period: '2023 — 2025',
             bullets: [
                 'Led end-to-end delivery for multiple features used by 1k+ users.',
                 'Built Laravel + Vue automation flows integrated with Jira & NetSuite.',
@@ -82,12 +107,12 @@ const profile = ref({
         }
     ],
     skills: [
-        'Laravel', 'Vue 3', 'TypeScript', 'PHP', 'MySQL', 'PostgreSQL', 'REST', 'CI/CD', 'Vite', 'Tailwind',
+        'Go', 'Laravel', 'Vue 3', 'TypeScript', 'PHP', 'MySQL', 'PostgreSQL', 'REST', 'CI/CD', 'Vite', 'Tailwind',
         'Node', 'Python', 'RAG', 'Chroma', 'Docker', 'Linux', 'Nginx', 'Jira', 'NetSuite'
     ],
     certifications: [
-        { name: 'Linux and Bash for Data Engineering', authority: 'Meta', year: 2025 },
-        { name: 'Database Structures and Management with MySQL', authority: 'Meta', year: 2025 }
+        {name: 'Linux and Bash for Data Engineering', authority: 'Meta', year: 2025},
+        {name: 'Database Structures and Management with MySQL', authority: 'Meta', year: 2025}
     ],
     resumeUrl: resume
 })
@@ -95,105 +120,104 @@ const profile = ref({
 
 <template>
     <GuestLayout>
-        <div class="relative overflow-hidden bg-slate-900 text-slate-200 min-h-screen rounded-3xl">
-            <!-- Background blobs -->
-            <div
-                class="pointer-events-none absolute -top-40 -right-32 h-96 w-96 rounded-full bg-gradient-to-tr from-fuchsia-500/30 to-indigo-500/30 blur-3xl">
-            </div>
-            <div
-                class="pointer-events-none absolute -bottom-40 -left-32 h-[28rem] w-[28rem] rounded-full bg-gradient-to-tr from-sky-500/30 to-emerald-500/30 blur-3xl">
-            </div>
+        <div class="relative overflow-hidden text-stone-800 min-h-screen rounded-3xl p-4 md:p-6 space-y-4 md:space-y-6">
+
 
             <!-- === About content takes the whole page === -->
-            <section class="mx-auto max-w-6xl px-4 pt-16 pb-10 bg-slate-900/90 rounded-lx">
+            <section id="about" class="mx-auto max-w-6xl px-6 pt-10 pb-10 bg-white rounded-2xl border border-stone-200 shadow-sm">
                 <div class="grid items-center gap-8 md:grid-cols-[1.2fr_.8fr]">
                     <div>
-                        <p class="inline-flex items-center gap-2 text-xs tracking-widest text-slate-400">
-                            <Sparkles class="h-4 w-4" /> ABOUT ME
+                        <p class="inline-flex items-center gap-2 text-xs tracking-widest text-stone-500">
+                            <Sparkles class="h-4 w-4"/>
+                            ABOUT ME
                         </p>
                         <h1 class="mt-2 text-4xl font-bold tracking-tight md:text-5xl">
                             <span
-                                class="bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
+                                class="bg-gradient-to-r from-amber-600 via-orange-500 to-amber-500 bg-clip-text text-transparent">
                                 {{ profile.value?.name || profile.name }}
                             </span>
                         </h1>
-                        <p class="mt-2 text-lg text-slate-300">{{ profile.title }}</p>
-                        <p class="mt-4 max-w-2xl text-slate-400">{{ profile.tagline }}</p>
+                        <p class="mt-2 text-lg text-stone-600">{{ profile.title }}</p>
+                        <p class="mt-4 max-w-2xl text-stone-500">{{ profile.tagline }}</p>
 
                         <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
                             <a :href="`mailto:${profile.email}`"
-                                class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 backdrop-blur hover:bg-white/10">
-                                <Mail class="h-4 w-4 opacity-80" /> {{ profile.email }}
+                               class="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-stone-100 px-3 py-1 backdrop-blur hover:bg-stone-200">
+                                <Mail class="h-4 w-4 opacity-80"/>
+                                {{ profile.email }}
                             </a>
                             <a :href="`tel:${profile.phone}`"
-                                class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 backdrop-blur hover:bg-white/10">
-                                <Phone class="h-4 w-4 opacity-80" /> {{ profile.phone }}
+                               class="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-stone-100 px-3 py-1 backdrop-blur hover:bg-stone-200">
+                                <Phone class="h-4 w-4 opacity-80"/>
+                                {{ profile.phone }}
                             </a>
                             <span
-                                class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1">
-                                <MapPin class="h-4 w-4 opacity-80" /> {{ profile.location }}
+                                class="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-stone-100 px-3 py-1">
+                                <MapPin class="h-4 w-4 opacity-80"/> {{ profile.location }}
                             </span>
                         </div>
 
                         <div class="mt-5 flex flex-wrap gap-3">
-                            <a v-for="s in profile.social" :key="s.label" :href="s.href" target="_blank" rel="noopener"
-                                class="group inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm backdrop-blur hover:bg-white/10">
-                                <component :is="s.icon" class="h-4 w-4 opacity-70 group-hover:opacity-100" />
+                            <a v-for="s in profile.social" :key="s.label" :href="s.href"
+                               class="group inline-flex items-center gap-2 rounded-xl border border-stone-200 bg-stone-100 px-3 py-2 text-sm backdrop-blur hover:bg-stone-200"
+                               rel="noopener"
+                               target="_blank">
+                                <component :is="s.icon" class="h-4 w-4 opacity-70 group-hover:opacity-100"/>
                                 <span>{{ s.label }}</span>
                             </a>
                         </div>
 
                         <div class="mt-7 flex gap-3">
                             <a :href="profile.resumeUrl"
-                                class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm backdrop-blur hover:bg-white/10">
-                                <Download class="h-4 w-4" /> Download Resume
+                               class="inline-flex items-center gap-2 rounded-xl border border-stone-200 bg-stone-100 px-4 py-2 text-sm backdrop-blur hover:bg-stone-200">
+                                <Download class="h-4 w-4"/>
+                                Download Resume
                             </a>
                             <a :href="`mailto:${profile.email}`"
-                                class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm backdrop-blur hover:bg-white/10">
+                               class="inline-flex items-center gap-2 rounded-xl border border-stone-200 bg-stone-100 px-4 py-2 text-sm backdrop-blur hover:bg-stone-200">
                                 Contact
-                                <ArrowRight class="h-4 w-4" />
+                                <ArrowRight class="h-4 w-4"/>
                             </a>
                         </div>
                     </div>
 
                     <div class="relative">
                         <div
-                            class="relative mx-auto aspect-square w-64 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 to-slate-800 shadow-2xl md:w-72">
-                            <img v-if="me" :src="me" alt="Headshot" class="h-full w-full object-cover" />
-                            <div v-else class="flex h-full w-full items-center justify-center text-slate-500">Add your
-                                photo</div>
+                            class="relative mx-auto aspect-square w-64 overflow-hidden rounded-3xl border border-stone-200 bg-gradient-to-br from-stone-100 to-stone-50 shadow-2xl md:w-72">
+                            <img v-if="me" :src="me" alt="Headshot" class="h-full w-full object-cover"/>
+                            <div v-else class="flex h-full w-full items-center justify-center text-stone-400">Add your
+                                photo
+                            </div>
                         </div>
-                        <div class="absolute -bottom-4 -left-4 flex gap-3">
+                        <div class="absolute -bottom-10 -left-4 flex gap-3 mt-10">
                             <div v-for="h in profile.highlights" :key="h.k"
-                                class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-center backdrop-blur">
-                                <div class="text-xl text-slate-50 font-semibold">{{ h.k }}</div>
-                                <div class="text-xs text-slate-50">{{ h.v }}</div>
+                                 class="rounded-2xl border border-stone-200 bg-stone-100 px-4 py-3 text-center backdrop-blur">
+                                <div class="text-xl text-stone-900 font-semibold">{{ h.k }}</div>
+                                <div class="text-xs text-stone-900">{{ h.v }}</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="relative mx-auto max-w-6xl px-4 py-14 ">
-
+            <section id="experience" class="relative mx-auto max-w-6xl px-6 py-10 bg-white rounded-2xl border border-stone-200 shadow-sm">
 
 
                 <!-- header -->
                 <header class="relative z-10 flex items-center justify-between gap-3">
                     <div class="flex items-center gap-3">
-                        <div class="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-sky-500/20 to-cyan-400/20
-               ring-1 ring-inset ring-white/15 shadow-sm shadow-cyan-400/10">
-                            <Briefcase class="size-5 text-sky-300" />
+                        <div class="grid size-10 place-items-center">
+                            <Briefcase class="size-5"/>
                         </div>
                         <div>
                             <h2 class="text-2xl font-semibold tracking-tight">Experience</h2>
-                            <p class="text-sm text-slate-400">Impact, scope, and the tools that got it done.</p>
+                            <p class="text-sm text-stone-500">Impact, scope, and the tools that got it done.</p>
                         </div>
                     </div>
 
                     <!-- subtle pill -->
                     <span class="hidden md:inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs
-             bg-white/5 ring-1 ring-white/10 text-slate-300">
+             bg-stone-100 ring-1 ring-stone-200 text-stone-600">
                         <span class="size-1.5 rounded-full bg-emerald-400/80 animate-pulse"></span>
                         Updated automatically
                     </span>
@@ -203,29 +227,32 @@ const profile = ref({
                 <ol class="relative z-10 mt-8 space-y-12"> <!-- added space-y for breathing room -->
                     <!-- gradient spine -->
                     <div aria-hidden="true" class="pointer-events-none absolute left-4 top-0 h-full w-px md:left-1/2
-           bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+           bg-gradient-to-b from-transparent via-stone-300 to-transparent"></div>
 
                     <li v-for="(job, idx) in profile.experiences" :key="idx"
                         class="relative md:grid md:grid-cols-2 md:gap-10 md:items-start">
 
                         <!-- dot -->
                         <div class="absolute left-[15px] md:left-1/2 md:-translate-x-1/2 top-4 size-3 rounded-full
-             bg-gradient-to-br from-sky-400 to-cyan-300 ring-2 ring-offset-2 ring-offset-slate-900/60 ring-white/20">
+             bg-gradient-to-br from-amber-500 to-orange-400 ring-2 ring-offset-2 ring-offset-stone-50 ring-stone-300">
                         </div>
 
                         <!-- left column -->
                         <div class="pl-10 pr-2 md:pl-0 md:pr-8 md:text-right md:order-1">
-                            <div class="inline-flex items-center gap-2 text-xs text-slate-400">
-                                <Calendar class="size-4" />
+                            <div class="inline-flex items-center gap-2 text-xs text-stone-500">
+                                <Calendar class="size-4"/>
                                 <span class="tabular-nums">{{ job.period }}</span>
                             </div>
-                            <h3 class="mt-2 text-lg font-semibold leading-snug">
-                                {{ job.role }}
-
-                            </h3>
+                            <div class="mt-2 flex items-center justify-end gap-2">
+                                <h3 class="text-lg font-semibold leading-snug">{{ job.role }}</h3>
+                                <span class="inline-flex items-center gap-1.5 rounded-full px-2 py-1
+                         bg-amber-100 text-amber-700 ring-1 ring-inset ring-amber-300/40">
+                                    <Briefcase class="size-3.5"/> {{ job.company }}
+                                </span>
+                            </div>
                             <div class="mt-3 flex flex-wrap gap-2 md:justify-end">
                                 <span v-for="t in job.tech" :key="t" class="rounded-full px-2.5 py-1 text-[11px] leading-4
-                 bg-white/5 text-slate-300 ring-1 ring-white/10
+                 bg-stone-100 text-stone-700 ring-1 ring-stone-200
                  transition-transform duration-300">
                                     {{ t }}
                                 </span>
@@ -235,32 +262,28 @@ const profile = ref({
                         <!-- right column: full-hover card -->
                         <div class="pl-10 md:pl-8 md:order-2">
                             <article class="relative overflow-hidden rounded-2xl
-               bg-gradient-to-b from-white/[0.06] to-white/[0.03]
-               ring-1 ring-white/10 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]
+               bg-gradient-to-b from-stone-100 to-stone-50
+               ring-1 ring-stone-200 shadow-[0_0_0_1px_rgba(0,0,0,0.02)]
                transition-all duration-300
-               hover:shadow-2xl hover:shadow-sky-500/20 hover:ring-sky-400/40">
+               hover:shadow-2xl hover:shadow-amber-500/20 hover:ring-amber-400/40">
 
                                 <!-- fix: full-bleed sheen overlay -->
                                 <span class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300
                  group-hover:opacity-100"
-                                    style="background: conic-gradient(from 180deg at 50% -10%, rgba(56,189,248,.18), transparent 40%);">
+                                      style="background: conic-gradient(from 180deg at 50% -10%, rgba(56,189,248,.18), transparent 40%);">
                                 </span>
 
                                 <div class="relative p-6">
-                                    <ul class="space-y-2.5 text-slate-300">
+                                    <ul class="space-y-2.5 text-stone-600">
                                         <li v-for="(b, i) in job.bullets" :key="i" class="flex gap-3">
-                                            <span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-sky-300/70"></span>
+                                            <span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-amber-500/70"></span>
                                             <p class="leading-relaxed">{{ b }}</p>
                                         </li>
                                     </ul>
-                                    <footer class="mt-5 flex items-center justify-between text-xs text-slate-400">
+                                    <footer class="mt-5 flex items-center justify-between text-xs text-stone-500">
                                         <span class="inline-flex items-center gap-2">
                                             <span class="size-1.5 rounded-full bg-emerald-400"></span>
                                             Proven impact
-                                        </span>
-                                        <span class="inline-flex items-center gap-1.5 rounded-full px-2 py-1
-                     bg-sky-400/10 text-sky-200 ring-1 ring-inset ring-sky-300/20">
-                                            <Briefcase class="size-3.5" /> {{ job.company }}
                                         </span>
                                     </footer>
                                 </div>
@@ -272,48 +295,53 @@ const profile = ref({
             </section>
 
 
-            <section class="mx-auto max-w-6xl px-4 pb-16 bg-slate-900/90 rounded-xl">
+            <section id="skills" class="mx-auto max-w-6xl px-6 py-10 bg-white rounded-2xl border border-stone-200 shadow-sm">
                 <h2 class="flex items-center gap-2 text-2xl font-semibold">
-                    <Code2 class="h-6 w-6" /> Skills
+                    <Code2 class="h-6 w-6"/>
+                    Skills
                 </h2>
                 <div class="mt-5 flex flex-wrap gap-2">
                     <span v-for="s in profile.skills" :key="s"
-                        class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-slate-300">{{ s
+                          class="rounded-full border border-stone-200 bg-stone-100 px-3 py-1 text-sm text-stone-700">{{
+                            s
                         }}</span>
                 </div>
             </section>
 
-            <section class="mx-auto max-w-6xl px-4 py-12 bg-slate-900/90 rounded-xl">
+            <section id="certifications" class="mx-auto max-w-6xl px-6 py-10 bg-white rounded-2xl border border-stone-200 shadow-sm">
                 <h2 class="flex items-center gap-2 text-2xl font-semibold">
-                    <Award class="h-6 w-6" /> Certifications
+                    <Award class="h-6 w-6"/>
+                    Certifications
                 </h2>
 
                 <ul class="mt-6 grid gap-4 sm:grid-cols-2">
                     <li v-for="(c, i) in profile.certifications" :key="i"
-                        class="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur">
+                        class="rounded-xl border border-stone-200 bg-stone-100 p-4 backdrop-blur">
                         <div class="flex items-start justify-between gap-4">
                             <div>
-                                <div class="text-base font-medium text-slate-100">
+                                <div class="text-base font-medium text-stone-900">
                                     {{ c.name }}
                                 </div>
-                                <div class="mt-1 text-sm text-slate-400">
+                                <div class="mt-1 text-sm text-stone-500">
                                     {{ c.authority }}
                                 </div>
                             </div>
                             <span
-                                class="shrink-0 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-slate-300">
+                                class="shrink-0 rounded-full border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs text-stone-700">
                                 {{ c.year }}
                             </span>
                         </div>
 
                         <!-- Optional helpers if you add them later (won't render unless present) -->
                         <div v-if="c.url || c.id" class="mt-3 flex flex-wrap items-center gap-3 text-xs">
-                            <a v-if="c.url" :href="c.url" target="_blank" rel="noopener"
-                                class="inline-flex items-center gap-1 underline underline-offset-4 hover:opacity-90">
+                            <a v-if="c.url" :href="c.url"
+                               class="inline-flex items-center gap-1 underline underline-offset-4 hover:opacity-90"
+                               rel="noopener"
+                               target="_blank">
                                 Verify
-                                <ArrowRight class="h-3 w-3" />
+                                <ArrowRight class="h-3 w-3"/>
                             </a>
-                            <span v-if="c.id" class="rounded-full border border-white/10 bg-white/5 px-2 py-0.5">
+                            <span v-if="c.id" class="rounded-full border border-stone-200 bg-stone-100 px-2 py-0.5">
                                 ID: {{ c.id }}
                             </span>
                         </div>
@@ -321,16 +349,39 @@ const profile = ref({
                 </ul>
             </section>
 
+            <section id="contact" class="mx-auto max-w-6xl px-6 py-10 bg-white rounded-2xl border border-stone-200 shadow-sm">
+                <h2 class="flex items-center gap-2 text-2xl font-semibold">
+                    <Mail class="h-6 w-6"/>
+                    Contact
+                </h2>
+                <p class="mt-2 text-stone-500">Get in touch — I'm open to new opportunities.</p>
+                <div class="mt-6 flex flex-wrap gap-3 text-sm">
+                    <a :href="`mailto:${profile.email}`"
+                       class="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-stone-100 px-3 py-1 hover:bg-stone-200">
+                        <Mail class="h-4 w-4 opacity-80"/> {{ profile.email }}
+                    </a>
+                    <a :href="`tel:${profile.phone}`"
+                       class="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-stone-100 px-3 py-1 hover:bg-stone-200">
+                        <Phone class="h-4 w-4 opacity-80"/> {{ profile.phone }}
+                    </a>
+                    <a v-for="s in profile.social" :key="s.label" :href="s.href"
+                       class="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-stone-100 px-3 py-1 hover:bg-stone-200"
+                       target="_blank" rel="noopener">
+                        <component :is="s.icon" class="h-4 w-4 opacity-80"/> {{ s.label }}
+                    </a>
+                </div>
+            </section>
+
             <!-- ===== Floating Action Button (FAB) - bottom right ===== -->
-            <button @click="openChat" aria-label="Open AI chat" class="fixed bottom-[calc(env(safe-area-inset-bottom)+1rem)] right-4 z-50
-         inline-flex items-center gap-2 rounded-full border border-white/10
-         bg-black px-4 py-2 text-sm font-medium text-slate-200 shadow-xl
-         backdrop-blur hover:bg-black/70 active:scale-[0.98]
-         md:px-5 md:py-2.5">
+            <button aria-label="Open AI chat" class="fixed bottom-[calc(env(safe-area-inset-bottom)+1rem)] right-4 z-50
+         inline-flex items-center gap-2 rounded-full border border-amber-700
+         bg-amber-600 px-4 py-2 text-sm font-medium text-white shadow-xl
+         backdrop-blur hover:bg-amber-700 active:scale-[0.98]
+         md:px-5 md:py-2.5" @click="openChat">
                 <span class="relative inline-flex">
-                    <MessageCircle class="h-5 w-5" />
+                    <MessageCircle class="h-5 w-5"/>
                     <span v-if="unread > 0"
-                        class="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-emerald-500 text-[10px] font-bold text-white">
+                          class="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-emerald-500 text-[10px] font-bold text-white">
                         {{ Math.min(9, unread) }}
                     </span>
                 </span>
@@ -339,8 +390,8 @@ const profile = ref({
 
             <!-- ===== Backdrop ===== -->
             <transition name="fade">
-                <div v-if="chatOpen" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-[2px]"
-                    @click="chatOpen = false" aria-hidden="true"></div>
+                <div v-if="chatOpen" aria-hidden="true"
+                     class="fixed inset-0 z-40 bg-stone-900/30 backdrop-blur-[2px]" @click="chatOpen = false"></div>
             </transition>
 
             <!-- ===== Responsive Chat Container =====
@@ -348,35 +399,36 @@ const profile = ref({
                 - Desktop: right drawer with rounded corners
             -->
             <transition :name="isDesktop ? 'slide-right' : 'slide-up'" mode="out-in">
-                <section v-if="chatOpen" role="dialog" aria-modal="true" class="fixed z-50
+                <section v-if="chatOpen" aria-modal="true" class="fixed z-50
            md:right-4 md:top-4
            md:h-[80vh] md:w-[520px]
            md:rounded-2xl
-           md:border md:border-white/10
-           md:bg-slate-900/90
+           md:border md:border-stone-200
+           md:bg-white
            md:shadow-2xl
            md:backdrop-blur
            /* Mobile bottom-sheet */
            left-0 right-0 bottom-0 top-0
            md:left-auto md:bottom-auto md:top-4
-           bg-slate-900/95">
+           bg-white" role="dialog">
                     <!-- Header -->
                     <header
-                        class="flex items-center justify-between border-b border-white/10 px-4 py-3 md:rounded-t-2xl">
-                        <div class="flex items-center gap-2 text-sm text-slate-300">
-                            <Sparkles class="h-4 w-4" />
+                        class="flex items-center justify-between border-b border-stone-200 px-4 py-3 md:rounded-t-2xl">
+                        <div class="flex items-center gap-2 text-sm text-stone-600">
+                            <Sparkles class="h-4 w-4"/>
                             Ask AI about {{ profile.value?.name || profile.name }}
                         </div>
-                        <button @click="chatOpen = false" aria-label="Close"
-                            class="rounded-lg border border-white/10 bg-white/5 p-2 hover:bg-white/10">
-                            <X class="h-4 w-4" />
+                        <button aria-label="Close"
+                                class="rounded-lg border border-stone-200 bg-stone-100 p-2 hover:bg-stone-200"
+                                @click="chatOpen = false">
+                            <X class="h-4 w-4"/>
                         </button>
                     </header>
 
 
                     <!-- Scroll area -->
                     <div class="flex h-[calc(100dvh-56px)] flex-col md:h-[calc(80vh-56px)]">
-                        <AiChat />
+                        <AiChat/>
                     </div>
 
                 </section>
@@ -386,37 +438,14 @@ const profile = ref({
 </template>
 
 <style scoped>
-/* Fade (backdrop) */
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 200ms ease;
+/* Smooth scrolling */
+:global(html) {
+    scroll-behavior: smooth;
 }
 
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0;
-}
-
-/* Drawer (desktop) */
-.slide-right-enter-active,
-.slide-right-leave-active {
-    transition: transform 220ms ease;
-}
-
-.slide-right-enter-from,
-.slide-right-leave-to {
-    transform: translateX(120%);
-}
-
-/* Bottom-sheet (mobile) */
-.slide-up-enter-active,
-.slide-up-leave-active {
-    transition: transform 220ms ease;
-}
-
-.slide-up-enter-from,
-.slide-up-leave-to {
-    transform: translateY(100%);
+/* Offset anchor targets to account for sticky navbar (~96px) */
+section[id] {
+    scroll-margin-top: 6rem;
 }
 
 /* Optional: slim scrollbars inside chat */
@@ -425,7 +454,7 @@ const profile = ref({
 }
 
 :deep(.overflow-y-auto)::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, .12);
+    background: rgba(0, 0, 0, .15);
     border-radius: 9999px;
 }
 </style>
