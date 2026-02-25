@@ -6,12 +6,16 @@ import Footer from '@/Components/Footer.vue';
 
 <template>
     <div class="relative min-h-screen flex flex-col overflow-hidden">
-        <!-- Animated Background -->
-        <div class="absolute inset-0 bg-sky-blue overflow-hidden">
-            <div class="cloud-container absolute inset-0">
-                <div class="cloud" style="top: 20%; left: 80%; animation-delay: 0s; animation-duration: 5s;"></div>
-                <div class="cloud" style="top: 40%; left: 10%; animation-delay: 1s; animation-duration: 6s;"></div>
-            </div>
+        <!-- Dark gradient background -->
+        <div class="absolute inset-0 bg-main overflow-hidden">
+            <!-- Dot-grid overlay -->
+            <div class="absolute inset-0 dot-grid"></div>
+
+            <!-- Orb 1: Cyan -->
+            <div class="orb orb-cyan"></div>
+
+            <!-- Orb 2: Violet -->
+            <div class="orb orb-violet"></div>
         </div>
 
         <!-- Content Overlay -->
@@ -32,43 +36,47 @@ import Footer from '@/Components/Footer.vue';
 
 
 <style scoped>
-@keyframes moveClouds {
-    0% {
-        transform: translateX(0);
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) scale(1);
     }
-
     50% {
-        transform: translateX(100px);
-    }
-
-    100% {
-        transform: translateX(0);
+        transform: translateY(-30px) scale(1.05);
     }
 }
 
-.bg-sky-blue {
-    background: linear-gradient(to bottom, #fafaf9, #f5f5f4);
+.bg-main {
+    background: linear-gradient(to bottom, #0f172a, #1e293b, #0f172a);
 }
 
-.cloud-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+.dot-grid {
+    background-image: radial-gradient(circle, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
 }
 
-.cloud {
+.orb {
     position: absolute;
-    background: rgba(214, 211, 208, 0.4);
-    width: 150px;
-    height: 100px;
-    border-radius: 50%;
-    box-shadow:
-        -40px -20px 0 -10px rgba(214, 211, 208, 0.4),
-        40px -20px 0 -10px rgba(214, 211, 208, 0.4),
-        0 20px 0 -10px rgba(214, 211, 208, 0.4);
-    filter: blur(10px);
-    opacity: 0.3;
-    animation: moveClouds 5s ease-in-out infinite;
+    border-radius: 9999px;
+    filter: blur(120px);
+    animation: float 20s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.orb-cyan {
+    top: -20%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: rgba(6, 182, 212, 0.10);
+}
+
+.orb-violet {
+    bottom: -20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: rgba(124, 58, 237, 0.10);
+    filter: blur(100px);
+    animation-delay: -10s;
 }
 </style>
