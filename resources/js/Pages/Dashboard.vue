@@ -11,7 +11,7 @@ import NavBar from '@/Components/NavBar.vue';
         <template #header>
             <NavBar />
             <h2
-                class="text-xl font-semibold leading-tight text-gray-800"
+                class="text-xl font-semibold leading-tight text-stone-800"
             >
                 Dashboard
             </h2>
@@ -22,7 +22,7 @@ import NavBar from '@/Components/NavBar.vue';
                 <div
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >
-                    <div class="p-6 text-gray-900">
+                    <div class="p-6 text-stone-900">
                         You're logged in!
                     </div>
                 </div>

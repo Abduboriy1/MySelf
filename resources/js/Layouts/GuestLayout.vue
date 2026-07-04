@@ -6,16 +6,16 @@ import Footer from '@/Components/Footer.vue';
 
 <template>
     <div class="relative min-h-screen flex flex-col overflow-hidden">
-        <!-- Dark gradient background -->
+        <!-- Warm cream gradient background -->
         <div class="absolute inset-0 bg-main overflow-hidden">
-            <!-- Dot-grid overlay -->
-            <div class="absolute inset-0 dot-grid"></div>
+            <!-- Square-grid overlay -->
+            <div class="absolute inset-0 square-grid"></div>
 
-            <!-- Orb 1: Cyan -->
-            <div class="orb orb-cyan"></div>
+            <!-- Orb 1: Amber -->
+            <div class="orb orb-amber"></div>
 
-            <!-- Orb 2: Violet -->
-            <div class="orb orb-violet"></div>
+            <!-- Orb 2: Rose -->
+            <div class="orb orb-rose"></div>
         </div>
 
         <!-- Content Overlay -->
@@ -46,12 +46,14 @@ import Footer from '@/Components/Footer.vue';
 }
 
 .bg-main {
-    background: linear-gradient(to bottom, #0f172a, #1e293b, #0f172a);
+    background: linear-gradient(to bottom, var(--bg-start), var(--bg-mid), var(--bg-end));
 }
 
-.dot-grid {
-    background-image: radial-gradient(circle, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
-    background-size: 32px 32px;
+.square-grid {
+    background-image:
+        linear-gradient(to right, rgba(120, 113, 108, 0.12) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(120, 113, 108, 0.12) 1px, transparent 1px);
+    background-size: 56px 56px;
 }
 
 .orb {
@@ -62,20 +64,20 @@ import Footer from '@/Components/Footer.vue';
     pointer-events: none;
 }
 
-.orb-cyan {
+.orb-amber {
     top: -20%;
     left: -10%;
     width: 600px;
     height: 600px;
-    background: rgba(6, 182, 212, 0.10);
+    background: var(--orb-amber);
 }
 
-.orb-violet {
+.orb-rose {
     bottom: -20%;
     right: -10%;
     width: 500px;
     height: 500px;
-    background: rgba(124, 58, 237, 0.10);
+    background: var(--orb-rose);
     filter: blur(100px);
     animation-delay: -10s;
 }

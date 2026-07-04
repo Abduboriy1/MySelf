@@ -59,40 +59,40 @@ const profile = ref({
     <div class="relative overflow-hidden">
         <!-- Soft gradient blobs (pure Tailwind) -->
         <div
-            class="pointer-events-none absolute -top-40 -right-32 h-96 w-96 rounded-full bg-gradient-to-tr from-fuchsia-500/20 to-indigo-500/20 blur-3xl">
+            class="pointer-events-none absolute -top-40 -right-32 h-96 w-96 rounded-full bg-gradient-to-tr from-amber-400/20 to-orange-400/20 blur-3xl">
         </div>
         <div
-            class="pointer-events-none absolute -bottom-40 -left-32 h-[28rem] w-[28rem] rounded-full bg-gradient-to-tr from-sky-500/20 to-emerald-500/20 blur-3xl">
+            class="pointer-events-none absolute -bottom-40 -left-32 h-[28rem] w-[28rem] rounded-full bg-gradient-to-tr from-rose-400/20 to-amber-400/20 blur-3xl">
         </div>
 
         <!-- HERO -->
         <section class="mx-auto max-w-6xl px-4 pt-16 pb-10">
             <div class="grid items-center gap-8 md:grid-cols-[1.2fr_.8fr]">
                 <div>
-                    <p class="inline-flex items-center gap-2 text-xs tracking-widest text-slate-400">
+                    <p class="inline-flex items-center gap-2 text-xs tracking-widest text-stone-600">
                         <Sparkles class="h-4 w-4" /> ABOUT ME
                     </p>
                     <h1 class="mt-2 text-4xl font-bold tracking-tight md:text-5xl">
                         <span
-                            class="bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
+                            class="bg-gradient-to-r from-amber-600 via-orange-500 to-rose-500 bg-clip-text text-transparent">
                             {{ profile.name }}
                         </span>
                     </h1>
-                    <p class="mt-2 text-lg text-slate-300">{{ profile.title }}</p>
-                    <p class="mt-4 max-w-2xl text-slate-400">{{ profile.tagline }}</p>
+                    <p class="mt-2 text-lg text-stone-700">{{ profile.title }}</p>
+                    <p class="mt-4 max-w-2xl text-stone-600">{{ profile.tagline }}</p>
 
                     <!-- Contact chips (lucide icons) -->
                     <div class="mt-6 flex flex-wrap items-center gap-3 text-sm">
                         <a :href="`mailto:${profile.email}`"
-                            class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 backdrop-blur hover:bg-white/10">
+                            class="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-stone-100 px-3 py-1 backdrop-blur hover:bg-stone-200">
                             <Mail class="h-4 w-4 opacity-80" /> {{ profile.email }}
                         </a>
                         <a :href="`tel:${profile.phone}`"
-                            class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 backdrop-blur hover:bg-white/10">
+                            class="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-stone-100 px-3 py-1 backdrop-blur hover:bg-stone-200">
                             <Phone class="h-4 w-4 opacity-80" /> {{ profile.phone }}
                         </a>
                         <span
-                            class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                            class="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-stone-100 px-3 py-1">
                             <MapPin class="h-4 w-4 opacity-80" /> {{ profile.location }}
                         </span>
                     </div>
@@ -100,7 +100,7 @@ const profile = ref({
                     <!-- Social buttons -->
                     <div class="mt-5 flex flex-wrap gap-3">
                         <a v-for="s in profile.social" :key="s.label" :href="s.href" target="_blank" rel="noopener"
-                            class="group inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm backdrop-blur hover:bg-white/10">
+                            class="group inline-flex items-center gap-2 rounded-xl border border-stone-200 bg-stone-100 px-3 py-2 text-sm backdrop-blur hover:bg-stone-200">
                             <component :is="s.icon" class="h-4 w-4 opacity-70 group-hover:opacity-100" />
                             <span>{{ s.label }}</span>
                         </a>
@@ -109,11 +109,11 @@ const profile = ref({
                     <!-- CTA -->
                     <div class="mt-7 flex gap-3">
                         <a :href="profile.resumeUrl"
-                            class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm backdrop-blur hover:bg-white/10">
+                            class="inline-flex items-center gap-2 rounded-xl border border-stone-200 bg-stone-100 px-4 py-2 text-sm backdrop-blur hover:bg-stone-200">
                             <Download class="h-4 w-4" /> Download Resume
                         </a>
                         <a :href="`mailto:${profile.email}`"
-                            class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm backdrop-blur hover:bg-white/10">
+                            class="inline-flex items-center gap-2 rounded-xl border border-stone-200 bg-stone-100 px-4 py-2 text-sm backdrop-blur hover:bg-stone-200">
                             Contact
                             <ArrowRight class="h-4 w-4" />
                         </a>
@@ -123,17 +123,17 @@ const profile = ref({
                 <!-- Avatar + Stats -->
                 <div class="relative">
                     <div
-                        class="relative mx-auto aspect-square w-64 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 to-slate-800 shadow-2xl md:w-72">
+                        class="relative mx-auto aspect-square w-64 overflow-hidden rounded-3xl border border-stone-200 bg-gradient-to-br from-stone-100 to-stone-200 shadow-2xl md:w-72">
                         <img v-if="profile.avatarUrl" :src="profile.avatarUrl" alt="Headshot"
                             class="h-full w-full object-cover" />
-                        <div v-else class="flex h-full w-full items-center justify-center text-slate-500">Add your photo
+                        <div v-else class="flex h-full w-full items-center justify-center text-stone-500">Add your photo
                         </div>
                     </div>
                     <div class="absolute -bottom-4 -left-4 flex gap-3">
                         <div v-for="h in profile.highlights" :key="h.k"
-                            class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-center backdrop-blur">
+                            class="rounded-2xl border border-stone-200 bg-stone-100 px-4 py-3 text-center backdrop-blur">
                             <div class="text-xl font-semibold">{{ h.k }}</div>
-                            <div class="text-xs text-slate-400">{{ h.v }}</div>
+                            <div class="text-xs text-stone-600">{{ h.v }}</div>
                         </div>
                     </div>
                 </div>
@@ -145,23 +145,23 @@ const profile = ref({
             <h2 class="flex items-center gap-2 text-2xl font-semibold">
                 <Briefcase class="h-6 w-6" /> Experience
             </h2>
-            <ol class="relative mt-6 border-s border-white/10">
+            <ol class="relative mt-6 border-s border-stone-200">
                 <li v-for="(job, idx) in profile.experiences" :key="idx" class="ms-4 pb-10">
-                    <div class="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border border-white/20 bg-white/40">
+                    <div class="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border border-amber-300 bg-amber-400">
                     </div>
                     <div class="flex flex-col justify-between gap-2 md:flex-row md:items-center">
-                        <div class="text-lg font-medium">{{ job.role }} · <span class="text-slate-400">{{ job.company
+                        <div class="text-lg font-medium">{{ job.role }} · <span class="text-stone-600">{{ job.company
                                 }}</span></div>
-                        <div class="inline-flex items-center gap-2 text-sm text-slate-400">
+                        <div class="inline-flex items-center gap-2 text-sm text-stone-600">
                             <Calendar class="h-4 w-4" /> {{ job.period }}
                         </div>
                     </div>
-                    <ul class="mt-3 list-disc space-y-2 pl-6 text-slate-300">
+                    <ul class="mt-3 list-disc space-y-2 pl-6 text-stone-700">
                         <li v-for="(b, i) in job.bullets" :key="i">{{ b }}</li>
                     </ul>
                     <div class="mt-3 flex flex-wrap gap-2">
                         <span v-for="t in job.tech" :key="t"
-                            class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-slate-300">{{
+                            class="rounded-full border border-stone-200 bg-stone-100 px-2.5 py-1 text-xs text-stone-700">{{
                             t }}</span>
                     </div>
                 </li>
@@ -175,7 +175,7 @@ const profile = ref({
             </h2>
             <div class="mt-5 flex flex-wrap gap-2">
                 <span v-for="s in profile.skills" :key="s"
-                    class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-slate-300">{{ s
+                    class="rounded-full border border-stone-200 bg-stone-100 px-3 py-1 text-sm text-stone-700">{{ s
                     }}</span>
             </div>
         </section>
